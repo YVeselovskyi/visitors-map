@@ -1,0 +1,16 @@
+{
+  "name": "visitors-map",
+  "version": "0.0.1",
+  "description": "Map with visitors:)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yaroslav Veselovskyi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.6.5",
+    "socket.io": "^1.5.1"
+  }
+}
