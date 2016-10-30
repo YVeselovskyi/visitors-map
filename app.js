@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const PORT = 1927 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const database = 'mongodb://root:abc123@ds011725.mlab.com:11725/shop';
 
