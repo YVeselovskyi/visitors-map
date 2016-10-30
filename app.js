@@ -21,7 +21,7 @@ const Visitor = mongoose.model('Visitor', { name: String , coordinates: Object }
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/index.html'));
     Visitor.find({}, function (err, docs) {
-        socket.emit('all visitors', { visitors: docs });
+        io.emit('all visitors', { visitors: docs });
     });
 });
 
