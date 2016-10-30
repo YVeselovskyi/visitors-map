@@ -20,16 +20,15 @@ const Visitor = mongoose.model('Visitor', { name: String , coordinates: Object }
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/index.html'));
+    Visitor.find({}, function (err, docs) {
+        socket.emit('all visitors', { visitors: docs });
+    });
 });
 
 
 app.use('/', express.static(__dirname + '/public/assets'));
 
 io.on('connection', function(socket){
-
-    Visitor.find({}, function (err, docs) {
-        socket.emit('all visitors', { visitors: docs });
-    });
 
     socket.on('new visitor', function (data) {
 
@@ -42,6 +41,9 @@ io.on('connection', function(socket){
                 console.log('saved');
             }
         });
+
+        io.emit('show new visitor', { user: user });
+
     });
 
 });

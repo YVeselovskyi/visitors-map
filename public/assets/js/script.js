@@ -1,5 +1,8 @@
 'use strict';
 const socket = io();
+let map;
+let userLattitude;
+let userLongitude;
 
 socket.on('all visitors', function (data) {
     let allVisitors = data.visitors;
@@ -13,11 +16,10 @@ const options = {
     enableHighAccuracy: true
 };
 
-let map;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 8
+        center: {lat: 49, lng: 28},
+        zoom: 4
     });
 }
 
@@ -32,10 +34,10 @@ function createMarker(lattitude, longitude) {
 function success(pos) {
     let crd = pos.coords;
 
-    socket.emit('new visitor', { lat: crd.latitude , lng: crd.longitude });
+    userLattitude = crd.latitude;
+    userLongitude = crd.longitude;
 
-    createMarker(crd.latitude, crd.longitude );
-
+    saveUserOnMap();
 }
 
 function error(err) {
@@ -43,6 +45,15 @@ function error(err) {
 }
 
 navigator.geolocation.getCurrentPosition(success, error, options);
+
+function saveUserOnMap() {
+    socket.emit('new visitor', { lat: userLattitude , lng: userLongitude });
+}
+
+socket.on('show new visitor', function (data) {
+    createMarker(data.user.coordinates.lat, data.user.coordinates.lng );
+});
+
 
 
 
