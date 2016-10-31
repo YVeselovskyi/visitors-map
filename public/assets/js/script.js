@@ -54,6 +54,8 @@ socket.on('show new visitor', function (data) {
     createMarker(data.user.coordinates.lat, data.user.coordinates.lng );
 });
 
+socket.emit('new-user-connected');
+
 
 
 
