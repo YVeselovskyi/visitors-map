@@ -39,12 +39,12 @@ io.on('connection', function(socket) {
             }
         });
 
-        socket.emit('show new visitor', { user: user });
+        io.emit('show new visitor', { user: user });
     });
 
     socket.on('new-user-connected', function(data) {
         Visitor.find({}, function(err, docs) {
-            socket.emit('all visitors', { visitors: docs });
+            io.emit('all visitors', { visitors: docs });
         });
     })
 
