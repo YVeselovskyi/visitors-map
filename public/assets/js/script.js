@@ -51,6 +51,7 @@ function saveUserOnMap() {
 }
 
 socket.on('show new visitor', function (data) {
+    console.log(data);
     createMarker(data.user.coordinates.lat, data.user.coordinates.lng );
 });
 

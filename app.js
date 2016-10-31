@@ -43,7 +43,6 @@ io.on('connection', function(socket) {
     });
 
     socket.on('new-user-connected', function(data) {
-        console.log('lol');
         Visitor.find({}, function(err, docs) {
             socket.emit('all visitors', { visitors: docs });
         });
